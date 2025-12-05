@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>컴퓨터 초보 가이드</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+
+      header {
+        background-color: #3cb371 !important;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .tab-menu {
+        display: flex;
+        justify-content: center;
+        background-color: #333;
+      }
+
+      .tab-menu button {
+        background-color: #333;
+        color: white;
+        border: none;
+        padding: 14px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      .tab-menu button:hover {
+        background-color: #555;
+      }
+
+      .tab-menu button.active {
+        background-color: #3cb371;
+      }
+
+      .tab-content {
+        display: none;
+        padding: 20px;
+        max-width: 1000px;
+        margin: 20px auto;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .component-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .component {
+        background-color: #fafafa;
+        border-radius: 10px;
+        padding: 20px;
+        width: 250px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
+      }
+
+      .component:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+      }
+
+      .component h3 {
+        margin: 10px 0;
+        color: #3cb371;
+      }
+
+      .component p {
+        font-size: 14px;
+        color: #555;
+      }
+
+      .detail-panel {
+        display: none;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .detail-panel h2 {
+        margin-top: 0;
+      }
+
+      .detail-body {
+        font-size: 15px;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .detail-actions {
+        margin-top: 18px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn {
+        background-color: #3cb371;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .btn.secondary {
+        background-color: #777;
+      }
+
+      .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        border-radius: 8px;
+        margin-bottom: 12px;
+      }
+
+      .video-wrapper iframe,
+      .video-wrapper video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .video-caption {
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 12px;
+        text-align: left;
+      }
+
+      .video-caption a {
+        color: #1976d2;
+        text-decoration: none;
+      }
+
+      .term {
+        position: relative;
+        cursor: help;
+        border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+        padding-bottom: 1px;
+        margin: 0 3px;
+        display: inline-block;
+      }
+
+      .term .tooltip-content {
+        display: none;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: calc(100% + 8px);
+        white-space: nowrap;
+        background: rgba(0, 0, 0, 0.85);
+        color: #fff;
+        padding: 8px 10px;
+        border-radius: 6px;
+        font-size: 13px;
+        z-index: 9999;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+      }
+
+      .term .tooltip-content::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 100%;
+        border-width: 6px 6px 0 6px;
+        border-style: solid;
+        border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
+      }
+
+      .term:hover .tooltip-content {
+        display: block;
+      }
+
+      @media (max-width: 600px) {
+        .component {
+          width: 100%;
+        }
+        .tab-menu {
+          flex-wrap: wrap;
+        }
+        .term .tooltip-content {
+          left: 0;
+          transform: none;
+          bottom: calc(100% + 6px);
+        }
+      }
+
+      #components h2,
+      #assembly h2,
+      #faq h2 {
+        text-align: center;
+      }
+
+      #windows h2 {
+        text-align: center;
+      }
+
+      .win-card {
+        background-color: #fafafa;
+        border-radius: 10px;
+        padding: 16px 18px;
+        margin: 16px 0;
+        border: 1px solid #d9dee6;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+      }
+
+      .win-card h3 {
+        margin-top: 0;
+        margin-bottom: 8px;
+        color: #3cb371;
+        font-size: 1.05rem;
+      }
+
+      .win-card p {
+        margin: 6px 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .win-card ol {
+        margin: 6px 0 4px 1.2rem;
+        padding-left: 0.3rem;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .win-sub-heading {
+        margin-top: 10px;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .win-note {
+        margin-top: 10px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        background: #f4f8ff;
+        border: 1px solid #d4e2ff;
+        font-size: 0.85rem;
+        color: #294066;
+      }
+
+      .win-checklist {
+        margin-top: 10px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        background: #fafafa;
+        border: 1px dashed #cfd4dd;
+        font-size: 0.9rem;
+      }
+
+      .win-check-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+        margin: 4px 0;
+      }
+
+      .win-check-item input[type='checkbox'] {
+        margin-top: 3px;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+        font-size: 0.9rem;
+        background: #f1f3f7;
+        padding: 1px 4px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>컴퓨터 초보 가이드</h1>
+    </header>
+
+    <div class="tab-menu">
+      <button class="tablink active" onclick="openTab(event, 'components')">컴퓨터 부품의 기초</button>
+      <button class="tablink" onclick="openTab(event, 'assembly')">조립 가이드</button>
+      <button class="tablink" onclick="openTab(event, 'windows')">윈도우 설치 방법</button>
+      <button class="tablink" onclick="openTab(event, 'faq')">자주 묻는 질문</button>
+    </div>
+
+    <div class="tab-content" id="components" style="display: block">
+      <h2>주요 부품 소개</h2>
+
+      <div class="component-list" id="componentList">
+        <div aria-pressed="false" class="component" data-key="cpu" role="button" tabindex="0">
+          <h3>CPU</h3>
+          <p>컴퓨터의 두뇌 역할. 연산과 명령 처리 담당.</p>
+        </div>
+        <div aria-pressed="false" class="component" data-key="ram" role="button" tabindex="0">
+          <h3>RAM</h3>
+          <p>작업 중인 데이터를 임시 저장하는 메모리.</p>
+        </div>
+        <div aria-pressed="false" class="component" data-key="gpu" role="button" tabindex="0">
+          <h3>GPU</h3>
+          <p>그래픽 처리 전용. 게임, 영상 편집 시 중요.</p>
+        </div>
+        <div aria-pressed="false" class="component" data-key="motherboard" role="button" tabindex="0">
+          <h3>메인보드</h3>
+          <p>모든 부품을 연결하는 중심 회로판.</p>
+        </div>
+        <div aria-pressed="false" class="component" data-key="psu" role="button" tabindex="0">
+          <h3>파워 서플라이</h3>
+          <p>컴퓨터에 필요한 전력을 공급하는 장치.</p>
+        </div>
+        <div aria-pressed="false" class="component" data-key="monitor" role="button" tabindex="0">
+          <h3>모니터</h3>
+          <p>화면 출력 장치. 해상도와 주사율이 중요.</p>
+        </div>
+        <div aria-pressed="false" class="component" data-key="storage" role="button" tabindex="0">
+          <h3>저장장치</h3>
+          <p>데이터를 영구 저장하는 장치. SSD/HDD 등이 있음.</p>
+        </div>
+        <div aria-pressed="false" class="component" data-key="cooler" role="button" tabindex="0">
+          <h3>쿨러</h3>
+          <p>CPU, GPU 등의 발열을 식혀주는 장치.</p>
+        </div>
+        <div aria-pressed="false" class="component" data-key="case" role="button" tabindex="0">
+          <h3>케이스</h3>
+          <p>컴퓨터 부품을 보호하고 장착하는 외부 구조물.</p>
+        </div>
+      </div>
+
+      <div aria-hidden="true" class="detail-panel" id="detailPanel">
+        <h2 id="detailTitle">제목</h2>
+        <div class="detail-body" id="detailBody">설명 내용이 여기에 표시됩니다.</div>
+        <div class="detail-actions">
+          <button class="btn" id="backBtn">목록으로 돌아가기</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="assembly">
+      <h2>컴퓨터 조립 기본 가이드</h2>
+      <p><strong>사용 부품</strong></p>
+      <p>CPU: AMD 2700X</p>
+      <p>GPU: MSI GTX 1070Ti</p>
+      <p>메인 보드: ASUS PRIME X470-PRO</p>
+      <p>램: G.SKILL TRIDENT Z 8GB x2</p>
+      <p>쿨러: Noctua NH-D15</p>
+      <p>파워: Seasonic FOCUS GX-850</p>
+      <div class="video-wrapper">
+        <video controls playsinline>
+          <source
+            src="https://res.cloudinary.com/dtb0e9stg/video/upload/v1763094830/video1_vq6iou.mp4"
+            type="video/mp4"
+          />
+          브라우저가 동영상을 지원하지 않습니다.
+        </video>
+      </div>
+      <p class="video-caption">
+        파일: <code>https://res.cloudinary.com/dtb0e9stg/video/upload/v1763094830/video1_vq6iou.mp4</code>
+      </p>
+
+      <div class="video-wrapper">
+        <video controls playsinline>
+          <source
+            src="https://res.cloudinary.com/dtb0e9stg/video/upload/v1763094829/video2_mibavt.mp4"
+            type="video/mp4"
+          />
+          브라우저가 동영상을 지원하지 않습니다.
+        </video>
+      </div>
+      <p class="video-caption">
+        파일: <code>https://res.cloudinary.com/dtb0e9stg/video/upload/v1763094829/video2_mibavt.mp4</code>
+      </p>
+    </div>
+
+    <div class="tab-content" id="windows">
+      <h2>윈도우 설치 방법</h2>
+
+      <div class="win-card">
+        <h3>1. Windows 설치 준비</h3>
+
+        <p class="win-sub-heading">1-1. Windows 설치 USB 만들기</p>
+        <ol>
+          <li>
+            인터넷이 되는 PC에서 브라우저를 열고, <strong>Microsoft 공식 Windows 다운로드 페이지</strong>에 접속합니다.
+          </li>
+          <li>
+            <strong>“설치 미디어 만들기(USB 플래시 드라이브, DVD 또는 ISO 파일)”</strong> 항목에서 도구(<strong
+              >Media Creation Tool</strong
+            >)를 다운로드합니다.
+          </li>
+          <li>
+            다운로드한 도구(<code>.exe</code>)를 실행한 다음, 안내에 따라 <strong>“동의”</strong>를 눌러 진행합니다.
+          </li>
+          <li>
+            설치할 Windows 버전/언어/에디션을 선택하고, 다음 단계에서 <strong>“USB 플래시 드라이브”</strong>를
+            선택합니다.
+          </li>
+          <li>
+            16GB 이상 용량의 USB를 PC에 연결하고 목록에서 해당 USB를 선택한 뒤 <strong>“다음”</strong>을 눌러 설치 USB
+            제작을 시작합니다.
+          </li>
+          <li>다운로드 및 복사가 완료되면, USB는 <strong>부팅 가능한 Windows 설치용 USB</strong>로 준비가 끝납니다.</li>
+        </ol>
+
+        <div class="win-note">
+          <strong>주의:</strong> 설치용으로 만드는 과정에서 USB 안의 기존 데이터는 모두 삭제됩니다. 중요한 파일이 있다면
+          반드시 다른 곳에 백업해 두세요.
+        </div>
+
+        <p class="win-sub-heading">1-2. BIOS에서 USB를 부팅 장치로 설정하기</p>
+        <ol>
+          <li>만들어 둔 설치용 USB를 <strong>새로 조립한 PC</strong>의 USB 포트에 꽂습니다.</li>
+          <li>
+            PC 전원을 켠 직후, 메인보드 로고가 나올 때까지 <code>Del</code> 또는 <code>F2</code> 키를 연타해
+            <strong>BIOS 화면</strong>으로 진입합니다.
+          </li>
+          <li>BIOS 메뉴에서 <strong>“Boot”, “부팅(BOOT)”</strong> 관련 메뉴를 찾습니다.</li>
+          <li>
+            <strong>Boot Priority(부팅 우선순위)</strong> 항목에서 설치 USB를 <strong>1순위</strong>로 설정합니다.
+          </li>
+          <li>설정을 저장하고 BIOS를 종료합니다. (보통 <code>F10</code> → <strong>“Save & Exit”</strong> 선택)</li>
+        </ol>
+      </div>
+
+      <div class="win-card">
+        <h3>2. Windows 설치 과정</h3>
+
+        <p class="win-sub-heading">2-1. USB로 첫 부팅하기</p>
+        <ol>
+          <li>BIOS 설정을 저장하고 PC가 재부팅되면, 자동으로 <strong>USB에서 부팅</strong>을 시도합니다.</li>
+          <li>
+            Windows 시작 화면에서 <strong>언어/시간/키보드</strong>를 선택한 뒤 <strong>“다음”</strong>을 클릭합니다.
+          </li>
+          <li><strong>“지금 설치”</strong> 버튼을 누릅니다.</li>
+        </ol>
+
+        <p class="win-sub-heading">2-2. 설치 유형과 드라이브(SSD) 선택</p>
+        <ol>
+          <li>
+            제품 키 입력 화면이 나오면, <strong>제품 키가 있다면 입력</strong>하고, 없다면
+            <strong>“제품 키가 없음”</strong>을 선택할 수 있습니다. (나중에도 입력 가능)
+          </li>
+          <li>
+            설치할 Windows 에디션(예: Home, Pro)을 선택하고, 약관에 <strong>“동의”</strong> 후 다음으로 넘어갑니다.
+          </li>
+          <li>설치 유형에서 <strong>“사용자 지정: Windows만 설치(고급)”</strong>을 선택합니다.</li>
+          <li>
+            드라이브 선택 화면에서 새로 장착한 <strong>SSD / NVMe 드라이브</strong>를 찾아 선택합니다.
+            <ul>
+              <li>완전히 새 SSD라면 <strong>“할당되지 않은 공간”</strong>으로 보일 수 있습니다.</li>
+              <li>
+                기존에 사용하던 SSD라면 여러 파티션이 보일 수 있으며, 필요에 따라 삭제 후 통합해서 설치하는 경우가
+                많습니다. (중요 데이터는 반드시 미리 백업)
+              </li>
+            </ul>
+          </li>
+          <li>
+            설치할 드라이브를 선택한 뒤 <strong>“다음”</strong>을 클릭하면, Windows 파일 복사 및 설치가 시작됩니다.
+          </li>
+        </ol>
+
+        <p class="win-sub-heading">2-3. 설치 진행 중 확인할 점</p>
+        <ol>
+          <li>
+            설치 단계(파일 복사, 기능 설치, 업데이트 등)가 자동으로 진행되며, 이 과정에서 PC가
+            <strong>여러 번 자동으로 재부팅</strong>될 수 있습니다. 이는 정상입니다.
+          </li>
+          <li>
+            처음 재부팅 후에는 설치 USB에서 다시 부팅되지 않도록, 필요하면 BIOS에서 부팅 우선순위를
+            <strong>SSD(Windows가 설치된 드라이브)</strong>로 되돌립니다. (USB가 계속 1순위면 설치 화면이 반복될 수
+            있습니다.)
+          </li>
+          <li>
+            설치가 완료되면 <strong>국가/키보드 레이아웃/PC 이름/계정</strong> 설정 등 초기 설정을 차례대로 진행하고,
+            바탕화면까지 진입하면 기본 설치가 끝난 것입니다.
+          </li>
+        </ol>
+
+        <div class="win-note">
+          <strong>Tip:</strong> 진행 막대가 아주 오래(30분 이상) 전혀 움직이지 않는 것처럼 보이면, 설치가 멈췄을
+          가능성이 있습니다. 이 경우 PC를 끄기 전에 잠시 더 기다려 보고, 반복되면 설치 USB를 다시 만들어 재시도하는
+          방법도 있습니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="faq">
+      <h2>자주 묻는 질문</h2>
+      <p><strong>Q1:</strong> CPU와 GPU 중 어느 게 더 중요한가요?</p>
+      <p>
+        <strong>A1:</strong> 용도에 따라 중요도가 다릅니다. 일반적으로는 게임·영상작업은 GPU, 연산작업은 CPU가
+        중요합니다.
+      </p>
+
+      <p><strong>Q2:</strong> RAM은 얼마나 필요할까요?</p>
+      <p><strong>A2:</strong> 일반 작업용 8GB, 게이밍/편집용 16GB 이상 권장.</p>
+
+      <p><strong>Q3:</strong> 어떤 GPU가 좋은지 모르겠어요</p>
+      <p>
+        <strong>A3:</strong> 가장 보편적인 GPU회사인 엔비디아를 예로 들자면 제품이름에
+        <span class="term" data-term="적혀 있는 숫자">
+          적혀 있는 숫자
+          <span class="tooltip-content">
+            ex) RTX 5070 &lt; RTX 5080 &lt; RTX 5090 앞의 2자리는 세대, 뒤 2자리는 성능을 나타냅니다. 숫자가 높을수록
+            성능이 더 좋습니다.
+          </span>
+        </span>
+        로 성능을 확인할 수 있습니다.
+      </p>
+
+      <p><strong>Q4:</strong> 파워서플라이 용량은 어떻게 정하나요</p>
+      <p>
+        <strong>A4:</strong> CPU, GPU, 주변기기 전력 합계 + 여유분 20~30% 권장합니다. 부품별 전력 소모량을 확인 후 전부
+        더해, 총 값에서 여유분을 추가해서 계산하면 됩니다.
+      </p>
+
+      <p><strong>Q5:</strong> 오버클록(Overclocking)이란 무엇인가요?</p>
+      <p>
+        <strong>A5:</strong> 오버클록이란 CPU, GPU, RAM 등 컴퓨터 부품을 제조사에서 기본으로 설정한 속도(클럭)보다 더
+        빠르게 동작하도록 조정하는 것으로, 성능 향상을 기대할 수 있지만 발열 증가·전력 소모 증가 등의 단점도 존재합니다.
+      </p>
+
+      <p><strong>Q6:</strong>어떤 부품이 더 좋은지 잘 모르겠어요.비교하기가 어려워요</p>
+      <p><strong>A6:</strong>부품 별 성능을 비교 할 수 있는 사이트를 참고 하면 좀 더 쉽게 알아 볼 수 있습니다.</p>
+      <p>
+        <a href="https://technical.city/ko" target="_blank"> https://technical.city/ko </a>
+      </p>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const componentData = {
+          cpu: {
+            title: 'CPU (중앙 처리 장치)',
+            body: ` 컴퓨터의 ‘두뇌’로, 명령을 읽고 계산을 수행해 프로그램을 작동시킵니다. GHz(클럭 속도)는 한 번에 처리하는 빠르기의 척도,
+          <span class="term" data-term="코어">코어
+          <span class="tooltip-content">코어는 실제로 일을 수행하는 물리적 처리 단위로 1코어 = 사람 1명으로 비유할 수 있습니다.</span></span>
+          /
+          <span class="term" data-term="스레드">스레드
+          <span class="tooltip-content">스레드는 논리적 처리 단위로, 코어가 사람 1명이라면 스레드는 그 사람의 작업 능률을 수치화한 것이라고 생각하시면 됩니다.</span></span>는 동시에 처리할 수 있는 일의 양에 해당합니다.`,
+            more: '#'
+          },
+          ram: {
+            title: 'RAM (메인 메모리)',
+            body: `작업 중인 데이터를 임시로 저장하는 메모리입니다. 용량(예: 8GB, 16GB)과 속도가 성능에 영향을 줍니다. 여러 프로그램을 동시에 실행하거나 큰 파일을 다룰 때 RAM은 작업 중인 데이터를 임시로 놓아두는 장소(작업 공간)에 해당합니다. 용량이 크면 여러 프로그램을 동시에 부드럽게 실행할 수 있고, 부족하면 컴퓨터가 느려질 수 있습니다.<br>설치 시
+          <span class="term" data-term="듀얼 채널로 설치하는 것이 가장 효율적입니다">듀얼 채널로 설치하는 것이 가장 효율적입니다
+          <span class="tooltip-content">ex) 16GB를 설치할 경우 8GB 램을 1,3 또는 2,4번 슬롯에 RAM 2개로 장착</span></span>.`,
+            more: '#'
+          },
+          gpu: {
+            title: 'GPU (그래픽 처리 장치)',
+            body: `화면에 보이는 이미지와 3D 연산을 빠르게 처리하는 전용 칩입니다. 게임, 영상 편집, 머신러닝 등에 중요하며 VRAM(전용 메모리) 용량이 클수록 큰 텍스처나 고해상도 작업에 유리합니다.`,
+            more: '#'
+          },
+          motherboard: {
+            title: '메인보드 (마더보드)',
+            body: `모든 부품을 연결하는 큰 회로판입니다. 어떤 CPU 소켓을 지원하는지, 메모리 타입(DDR4/DDR5), 확장 슬롯(그래픽카드/저장장치 추가 가능) 등을 보고, 구매한 부품들과의 호환성을 반드시 확인해야 합니다.`,
+            more: '#'
+          },
+          psu: {
+            title: '파워 서플라이 (PSU)',
+            body: `파워 서플라이는 시스템에 안정적으로 전력을 공급합니다. 출력과 효율 등을 확인해야 하며, 각 부품들이 요구하는 전력을 안정적으로 공급할 수 있는지 계산 후 선택해야 합니다. 우리 몸의 심장과 같은 역할입니다.`,
+            more: '#'
+          },
+          monitor: {
+            title: '모니터',
+            body: `모니터는 화면 출력 장치입니다. 해상도(예:
+          <span class="term" data-term="FHD">FHD
+          <span class="tooltip-content">FHD: 1920x1080</span></span>,
+          <span class="term" data-term="QHD">QHD
+          <span class="tooltip-content">QHD: 2560x1440</span></span>,
+          <span class="term" data-term="4K">4K
+          <span class="tooltip-content">4K: 3840x2160</span></span>)와
+          <span class="term" data-term="주사율">주사율(Hz)
+          <span class="tooltip-content">화면 갱신 빈도. 주사율이 높을수록 부드러운 화면이 출력됩니다.</span></span>,
+          패널(
+          <span class="term" data-term="TN">TN
+          <span class="tooltip-content">TN: 응답속도가 빠르고 가격이 저렴하지만 색 재현력과 시야각이 떨어집니다.</span></span>,
+          <span class="term" data-term="VA">VA
+          <span class="tooltip-content">VA: 높은 명암비로 깊은 검은색 표현이 우수합니다.</span></span>,
+          <span class="term" data-term="IPS">IPS
+          <span class="tooltip-content">IPS: 색 재현성과 시야각이 뛰어나 편집 작업에 적합합니다.</span></span>) 등을 보고 선택합니다.`,
+            more: '#'
+          },
+          storage: {
+            title: '저장장치 (SSD / HDD)',
+            body: `데이터를 영구 저장하는 공간입니다. SSD는 부팅과 프로그램 실행 속도가 빠르고, NVMe SSD는 일반 SATA SSD보다 더 빠릅니다. HDD는 느리지만 같은 가격에 더 큰 용량을 제공하므로 대용량 보관용으로 적합합니다.`,
+            more: '#'
+          },
+          cooler: {
+            title: '쿨러',
+            body: `쿨러는 CPU/GPU 등의 발열을 식혀 안정적으로 동작하도록 돕습니다. 
+          <span class="term" date-term="공랭 쿨러">공랭 쿨러
+          <span class="tooltip-content">팬과 방열판으로 공기를 이용해 열을 식히는 방식입니다.</span></span>와
+          <span class="term" date-term="수랭 쿨러">수랭 쿨러
+          <span class="tooltip-content">액체를 통해 열을 전달하고 식히는 방식으로, 공랭보다 냉각 성능이 뛰어납니다.</span></span>가 있습니다.`,
+            more: '#'
+          },
+          case: {
+            title: '케이스',
+            body: `케이스는 부품을 보호하고 담는 외형입니다. 크기, 통풍(팬 장착 위치), 확장성(드라이브 슬롯 수), 케이블 정리 공간 등을 고려해 선택합니다.`,
+            more: '#'
+          }
+        };
+
+        history.replaceState({ panel: null }, document.title, location.pathname + location.search);
+
+        function openTab(evt, tabName) {
+          const tabContents = document.querySelectorAll('.tab-content');
+          tabContents.forEach((tc) => (tc.style.display = 'none'));
+
+          const tabLinks = document.querySelectorAll('.tablink');
+          tabLinks.forEach((link) => link.classList.remove('active'));
+
+          document.getElementById(tabName).style.display = 'block';
+          evt.currentTarget.classList.add('active');
+
+          closeDetail(false);
+        }
+
+        const componentList = document.getElementById('componentList');
+        const detailPanel = document.getElementById('detailPanel');
+        const detailTitle = document.getElementById('detailTitle');
+        const detailBody = document.getElementById('detailBody');
+        const backBtn = document.getElementById('backBtn');
+
+        componentList.addEventListener('click', (e) => {
+          const target = e.target.closest('.component');
+          if (!target) return;
+          const key = target.getAttribute('data-key');
+          showDetail(key, { push: true });
+        });
+
+        componentList.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            const target = e.target.closest('.component');
+            if (!target) return;
+            e.preventDefault();
+            const key = target.getAttribute('data-key');
+            showDetail(key, { push: true });
+          }
+        });
+
+        let docClickHandler = null;
+        function showDetail(key, opts = { push: true }) {
+          const data = componentData[key];
+          if (!data) return;
+
+          detailTitle.textContent = data.title;
+          detailBody.innerHTML = data.body;
+
+          componentList.style.display = 'none';
+          detailPanel.style.display = 'block';
+          detailPanel.setAttribute('aria-hidden', 'false');
+
+          if (opts.push) {
+            history.pushState({ panel: key }, data.title + ' - ' + document.title, '#' + key);
+          }
+
+          detailPanel.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeDetail(keepHistory = false) {
+          detailPanel.style.display = 'none';
+          detailPanel.setAttribute('aria-hidden', 'true');
+          componentList.style.display = 'flex';
+
+          if (docClickHandler) {
+            document.removeEventListener('click', docClickHandler);
+            docClickHandler = null;
+          }
+          if (!keepHistory) {
+            history.replaceState({ panel: null }, document.title, location.pathname + location.search);
+          }
+        }
+
+        backBtn.addEventListener('click', () => {
+          if (history.state && history.state.panel) {
+            history.back();
+          } else {
+            closeDetail();
+          }
+        });
+
+        window.addEventListener('popstate', (e) => {
+          const state = e.state;
+          if (state && state.panel) {
+            showDetail(state.panel, { push: false });
+          } else {
+            closeDetail(true);
+          }
+        });
+
+        document.querySelectorAll('.tablink').forEach((t) => {
+          t.addEventListener('click', (ev) => {
+            const tabName = t.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
+            if (tabName) openTab(ev, tabName);
+          });
+        });
+
+        const initialHash = location.hash.replace('#', '');
+        if (initialHash && componentData[initialHash]) {
+          showDetail(initialHash, { push: false });
+          history.replaceState({ panel: initialHash }, document.title, '#' + initialHash);
+        }
+
+        document.getElementById('components').style.display = 'block';
+      });
+    </script>
+
+    <style>
+      :root {
+        --bg-color: #f5f5f5;
+        --text-color: #333;
+        --card-bg: #ffffff;
+        --accent-color: #4caf50;
+        --header-bg: #2f684f;
+        --header-text: #ffffff;
+      }
+
+      body.dark-mode {
+        --bg-color: #242427;
+        --text-color: #e6e6f1;
+        --card-bg: #2f2f33;
+        --accent-color: #81c784;
+        --header-bg: #1e1e21;
+        --header-text: #e6e6f1;
+      }
+
+      body {
+        background-color: var(--bg-color) !important;
+        color: var(--text-color) !important;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      header {
+        background-color: var(--header-bg) !important;
+        color: var(--header-text) !important;
+        position: relative;
+      }
+
+      .tab-content,
+      .component,
+      .detail-panel {
+        background-color: var(--card-bg) !important;
+        color: var(--text-color) !important;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      body.dark-mode .win-card {
+        background-color: #2f2f33 !important;
+        border-color: #4a4a50;
+        color: #e6e6f1 !important;
+      }
+
+      body.dark-mode .win-card h3,
+      body.dark-mode .win-card p,
+      body.dark-mode .win-card li,
+      body.dark-mode .win-sub-heading {
+        color: #e6e6f1 !important;
+      }
+
+      body.dark-mode .win-checklist {
+        background-color: #2a2a30 !important;
+        border-color: #555 !important;
+      }
+
+      body.dark-mode .win-check-item label {
+        color: #e6e6f1 !important;
+      }
+
+      body.dark-mode .win-note {
+        background: #27324a !important;
+        border-color: #3b4b6b !important;
+        color: #e6ecff !important;
+      }
+
+      body.dark-mode .component {
+        border: 1px solid rgba(230, 230, 241, 0.3);
+        box-shadow: 0 0 10px rgba(230, 230, 241, 0.1);
+      }
+
+      body.dark-mode .component h3,
+      body.dark-mode .component p,
+      body.dark-mode .detail-body,
+      body.dark-mode .detail-panel h2 {
+        color: #e6e6f1 !important;
+      }
+
+      body.dark-mode code {
+        background: #111827 !important;
+        color: #e5e7eb !important;
+      }
+
+      #themeToggle {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        width: 64px;
+        height: 32px;
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 50px;
+        cursor: pointer;
+        transition: background 0.3s ease, border 0.3s ease;
+        display: flex;
+        align-items: center;
+        padding: 2px;
+        box-sizing: border-box;
+        backdrop-filter: blur(8px);
+      }
+
+      #themeToggle .thumb {
+        width: 28px;
+        height: 28px;
+        background: #ffffff;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+
+      #themeToggle .thumb::before {
+        content: '🌙';
+        transition: all 0.3s ease;
+      }
+
+      body.dark-mode #themeToggle {
+        background: rgba(0, 0, 0, 0.25);
+        border-color: rgba(230, 230, 241, 0.2);
+      }
+
+      body.dark-mode #themeToggle .thumb {
+        transform: translateX(32px);
+        background: #ffd93d;
+      }
+
+      body.dark-mode #themeToggle .thumb::before {
+        content: '☀️';
+      }
+
+      #themeToggle:hover {
+        transform: scale(1.05);
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('header');
+        if (!header) return;
+
+        const toggleBtn = document.createElement('button');
+        toggleBtn.id = 'themeToggle';
+        toggleBtn.innerHTML = '<div class="thumb"></div>';
+        header.appendChild(toggleBtn);
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') document.body.classList.add('dark-mode');
+
+        toggleBtn.addEventListener('click', () => {
+          document.body.classList.toggle('dark-mode');
+          const isDark = document.body.classList.contains('dark-mode');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+      });
+    </script>
+  </body>
+</html>
