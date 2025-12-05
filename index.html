@@ -554,7 +554,10 @@
         const componentData = {
           cpu: {
             title: 'CPU (중앙 처리 장치)',
-            body: ` 컴퓨터의 ‘두뇌’로, 명령을 읽고 계산을 수행해 프로그램을 작동시킵니다. GHz(클럭 속도)는 한 번에 처리하는 빠르기의 척도,
+            body: `<img src="cpu.png" alt="이미지"
+            style="width: 100%; max-width: 350px; border-radius: 10px; display: block; margin: 10px auto;">
+
+            컴퓨터의 ‘두뇌’로, 명령을 읽고 계산을 수행해 프로그램을 작동시킵니다. GHz(클럭 속도)는 한 번에 처리하는 빠르기의 척도,
           <span class="term" data-term="코어">코어
           <span class="tooltip-content">코어는 실제로 일을 수행하는 물리적 처리 단위로 1코어 = 사람 1명으로 비유할 수 있습니다.</span></span>
           /
@@ -564,29 +567,40 @@
           },
           ram: {
             title: 'RAM (메인 메모리)',
-            body: `작업 중인 데이터를 임시로 저장하는 메모리입니다. 용량(예: 8GB, 16GB)과 속도가 성능에 영향을 줍니다. 여러 프로그램을 동시에 실행하거나 큰 파일을 다룰 때 RAM은 작업 중인 데이터를 임시로 놓아두는 장소(작업 공간)에 해당합니다. 용량이 크면 여러 프로그램을 동시에 부드럽게 실행할 수 있고, 부족하면 컴퓨터가 느려질 수 있습니다.<br>설치 시
-          <span class="term" data-term="듀얼 채널로 설치하는 것이 가장 효율적입니다">듀얼 채널로 설치하는 것이 가장 효율적입니다
-          <span class="tooltip-content">ex) 16GB를 설치할 경우 8GB 램을 1,3 또는 2,4번 슬롯에 RAM 2개로 장착</span></span>.`,
+            body: `<img src="ram.png" alt="이미지"
+            style="width: 100%; max-width: 350px; border-radius: 10px; display: block; margin: 10px auto;">
+            
+            작업 중인 데이터를 임시로 저장하는 메모리입니다. 용량(예: 8GB, 16GB)과 속도가 성능에 영향을 줍니다. 여러 프로그램을 동시에 실행하거나 큰 파일을 다룰 때 RAM은 작업 중인 데이터를 임시로 놓아두는 장소(작업 공간)에 해당합니다. 용량이 크면 여러 프로그램을 동시에 부드럽게 실행할 수 있고, 부족하면 컴퓨터가 느려질 수 있습니다.<br>설치 시
+            <span class="term" data-term="듀얼 채널로 설치하는 것이 가장 효율적입니다">듀얼 채널로 설치하는 것이 가장 효율적입니다
+            <span class="tooltip-content">ex) 16GB를 설치할 경우 8GB 램을 1,3 또는 2,4번 슬롯에 RAM 2개로 장착</span></span>.`,
             more: '#'
           },
           gpu: {
             title: 'GPU (그래픽 처리 장치)',
-            body: `화면에 보이는 이미지와 3D 연산을 빠르게 처리하는 전용 칩입니다. 게임, 영상 편집, 머신러닝 등에 중요하며 VRAM(전용 메모리) 용량이 클수록 큰 텍스처나 고해상도 작업에 유리합니다.`,
+            body: `<img src="gpu.png" alt="이미지"
+            style="width: 100%; max-width: 350px; border-radius: 10px; display: block; margin: 10px auto;">
+            화면에 보이는 이미지와 3D 연산을 빠르게 처리하는 전용 칩입니다. 게임, 영상 편집, 머신러닝 등에 중요하며 VRAM(전용 메모리) 용량이 클수록 큰 텍스처나 고해상도 작업에 유리합니다.`,
             more: '#'
           },
           motherboard: {
             title: '메인보드 (마더보드)',
-            body: `모든 부품을 연결하는 큰 회로판입니다. 어떤 CPU 소켓을 지원하는지, 메모리 타입(DDR4/DDR5), 확장 슬롯(그래픽카드/저장장치 추가 가능) 등을 보고, 구매한 부품들과의 호환성을 반드시 확인해야 합니다.`,
+            body: `<img src="MB.png" alt="이미지"
+            style="width: 100%; max-width: 350px; border-radius: 10px; display: block; margin: 10px auto;">
+            모든 부품을 연결하는 큰 회로판입니다. 어떤 CPU 소켓을 지원하는지, 메모리 타입(DDR4/DDR5), 확장 슬롯(그래픽카드/저장장치 추가 가능) 등을 보고, 구매한 부품들과의 호환성을 반드시 확인해야 합니다.`,
             more: '#'
           },
           psu: {
             title: '파워 서플라이 (PSU)',
-            body: `파워 서플라이는 시스템에 안정적으로 전력을 공급합니다. 출력과 효율 등을 확인해야 하며, 각 부품들이 요구하는 전력을 안정적으로 공급할 수 있는지 계산 후 선택해야 합니다. 우리 몸의 심장과 같은 역할입니다.`,
+            body: `<img src="power.png" alt="이미지"
+            style="width: 100%; max-width: 350px; border-radius: 10px; display: block; margin: 10px auto;">
+            파워 서플라이는 시스템에 안정적으로 전력을 공급합니다. 출력과 효율 등을 확인해야 하며, 각 부품들이 요구하는 전력을 안정적으로 공급할 수 있는지 계산 후 선택해야 합니다. 우리 몸의 심장과 같은 역할입니다.`,
             more: '#'
           },
           monitor: {
             title: '모니터',
-            body: `모니터는 화면 출력 장치입니다. 해상도(예:
+            body: `<img src="monitor.png" alt="이미지"
+            style="width: 100%; max-width: 350px; border-radius: 10px; display: block; margin: 10px auto;">
+            모니터는 화면 출력 장치입니다. 해상도(예:
           <span class="term" data-term="FHD">FHD
           <span class="tooltip-content">FHD: 1920x1080</span></span>,
           <span class="term" data-term="QHD">QHD
@@ -606,21 +620,29 @@
           },
           storage: {
             title: '저장장치 (SSD / HDD)',
-            body: `데이터를 영구 저장하는 공간입니다. SSD는 부팅과 프로그램 실행 속도가 빠르고, NVMe SSD는 일반 SATA SSD보다 더 빠릅니다. HDD는 느리지만 같은 가격에 더 큰 용량을 제공하므로 대용량 보관용으로 적합합니다.`,
+            body: `<img src="ssd.png" alt="이미지"
+            style="width: 100%; max-width: 350px; border-radius: 10px; display: block; margin: 10px auto;">
+            데이터를 영구 저장하는 공간입니다. SSD는 부팅과 프로그램 실행 속도가 빠르고, NVMe SSD는 일반 SATA SSD보다 더 빠릅니다. HDD는 느리지만 같은 가격에 더 큰 용량을 제공하므로 대용량 보관용으로 적합합니다.`,
             more: '#'
           },
           cooler: {
             title: '쿨러',
-            body: `쿨러는 CPU/GPU 등의 발열을 식혀 안정적으로 동작하도록 돕습니다. 
-          <span class="term" date-term="공랭 쿨러">공랭 쿨러
-          <span class="tooltip-content">팬과 방열판으로 공기를 이용해 열을 식히는 방식입니다.</span></span>와
-          <span class="term" date-term="수랭 쿨러">수랭 쿨러
-          <span class="tooltip-content">액체를 통해 열을 전달하고 식히는 방식으로, 공랭보다 냉각 성능이 뛰어납니다.</span></span>가 있습니다.`,
+            body: `<img src="cooler.png" alt="이미지"
+            style="width: 100%; max-width: 350px; border-radius: 10px; display: block; margin: 10px auto;">
+            쿨러는 CPU/GPU 등의 발열을 식혀 안정적으로 동작하도록 돕는 장치입니다. 종류는 크게
+            <span class="term" date-term="공랭 쿨러">공랭 쿨러
+            <span class="tooltip-content">팬과 방열판으로 공기를 이용해 열을 식히는 방식입니다.</span></span>
+            와 
+            <span class="term" date-term="수랭 쿨러">수랭 쿨러
+            <span class="tooltip-content">액체를 통해 열을 전달하고 식히는 방식으로, 공랭보다 냉각 성능이 뛰어납니다.</span></span>
+            로 나눌 수 있습니다. </span></span>`,
             more: '#'
           },
           case: {
             title: '케이스',
-            body: `케이스는 부품을 보호하고 담는 외형입니다. 크기, 통풍(팬 장착 위치), 확장성(드라이브 슬롯 수), 케이블 정리 공간 등을 고려해 선택합니다.`,
+            body: `<img src="case.png" alt="이미지"
+            style="width: 100%; max-width: 350px; border-radius: 10px; display: block; margin: 10px auto;">
+            케이스는 부품을 보호하고 담는 외형입니다. 크기, 통풍(팬 장착 위치), 확장성(드라이브 슬롯 수), 케이블 정리 공간 등을 고려해 선택합니다.`,
             more: '#'
           }
         };
